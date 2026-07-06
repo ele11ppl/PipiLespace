@@ -1,0 +1,35 @@
+[
+  {
+    "id": "01",
+    "title": "A/G OBJECT I",
+    "category": "衍生品设计",
+    "year": "2024",
+    "material": "Glazed ceramic",
+    "dims": "240 × 180 × 60 mm",
+    "desc": "Study in mass-produced imperfection.",
+    "thumb": "",
+    "full": ""
+  },
+  {
+    "id": "02",
+    "title": "FORM FOLLOWS FORMAT",
+    "category": "刊本设计",
+    "year": "2025",
+    "material": "Risograph / Newsprint",
+    "dims": "280 × 380 mm",
+    "desc": "Constraint-driven layout systems. Edition of 200.",
+    "thumb": "",
+    "full": ""
+  },
+  {
+    "id": "03",
+    "title": "NEUE GROTESK VARIABLE",
+    "category": "字体设计",
+    "year": "2024",
+    "material": "Digital / OpenType",
+    "dims": "Weight axis 100–900",
+    "desc": "Variable sans-serif study.",
+    "thumb": "",
+    "full": ""
+  }
+]

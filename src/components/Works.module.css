@@ -1,0 +1,69 @@
+.grid {
+  column-count: 2;
+  column-gap: 20px;
+  width: 100%;
+}
+@media (max-width: 600px) {
+  .grid { column-count: 1; }
+}
+
+.card {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.card:active {
+  transform: scale(1.04);
+  transition: transform 0.1s ease;
+}
+
+.overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+
+.modal img {
+  max-width: 600px; max-height: 80vh;
+  width: auto; height: auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.empty {
+  text-align: center; color: #444;
+  font-family: var(--font-mono); font-size: 0.75rem;
+  letter-spacing: 0.1em; padding: var(--space-16) 0;
+  user-select: none;
+}
+
+:global(.back-to-top-btn) {
+  position: fixed; bottom: 50px; right: 120px; z-index: 9999;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: #1e1e1e; color: #fff; border: 1px solid #333;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s, background 0.2s; font-size: 1rem;
+}
+:global(.back-to-top-btn):hover { transform: scale(1.1); background: #2a2a2a; }
+:global(.back-to-top-btn):active { transform: scale(0.95); }

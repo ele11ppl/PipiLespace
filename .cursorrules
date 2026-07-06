@@ -1,0 +1,59 @@
+# Code Output Rules
+- NEVER output the entire file. Use targeted Edit tool calls with old_string/new_string.
+- Skip unchanged sections with `// ... unchanged code ...` comments.
+- Always Read a file before editing it.
+
+# File Modification Rules
+- Content/text changes → edit the specific JSX block or data array inside the page/component file.
+- Behaviour/logic changes → edit the specific function/loop/state machine inside the component.
+- Styling changes → edit the component's inline `<style>` block or `global.css` for tokens.
+- DO NOT rewrite entire files. Use smallest possible Edit replacements.
+
+# Performance Rules
+- Hot-path animations (Canvas, cursor) MUST use `useRef` + RAF, NEVER `useState`.
+- Canvas rendering: `requestAnimationFrame` + `ctx.clearRect` + direct draw. No React in the loop.
+- Cursor: `translate3d` + `classList.toggle`, zero Framer Motion.
+
+# Component Boundaries
+- `src/components/` — reusable UI (Layout, Navbar, Cursor, Audio, ParticleTrail, Portfolio*).
+- `src/pages/` — route-level components (About, Portfolio, Tutorials, Contact).
+- `src/sketches/` — p5.js sketch definitions.
+- Never import a page into a component. Pages can import components.
+
+# CSS Rules
+- All colours/spacing/z-index MUST reference `var(--*)` tokens from `global.css`.
+- Component-specific styles go in the component's inline `<style>` block (scoped).
+- Use `--font-sans` for Chinese/body, `--font-mono` for English/labels/code.
+
+# Data vs Logic
+- Static content arrays (links, categories, works, bio text, sheets) live at the TOP of their component file as `const` declarations.
+- Core logic (state machines, RAF loops, Canvas drawing, flip physics) lives inside the component function body.
+- When changing text, ONLY touch the static data arrays — never the rendering logic.
+
+# Stale Code
+- Check imports before editing. Files only imported by Layout.jsx or App.jsx are active.
+- Dead components: AudioOrb, AudioPlayer, AudioTerminal (replaced by AudioRipples).
+
+# File Size Limits
+- Contact.jsx (~480L) and About.jsx (~470L) are the largest files. Split if exceeding 550L.
+- All other files stay under 300L.
+
+# Asset Naming Convention (MANDATORY)
+- ALL image assets follow: `{module}_{subcategory}_{sequence}_{ratio}.{ext}`
+- Examples: `portfolio_typography_1_1to1.jpg`, `portfolio_print_2_3to4.jpg`, `about_hero_1_16to9.png`
+- `module` — lowercase identifier for the page/feature (portfolio, about, contact, tutorials).
+- `subcategory` — lowercase group within the module (typography, print, googdesign, hero, bg).
+- `sequence` — integer, starting from 1. Determines display order. NEVER reorder manually.
+- `ratio` — aspect-ratio token using `{w}to{h}` format: `1to1`, `3to4`, `4to3`, `16to9`, `9to16`.
+- `ext` — lowercase file extension (jpg, jpeg, png, webp, gif).
+
+# Works.jsx Auto-Discovery + Adaptive Grid
+- Uses `import.meta.glob('../assets/works/*.{jpg,jpeg,png,webp,gif}', { eager: true })`.
+- Regex: `/(\w+)_(\w+)_(\d+)_(\d+to\d+)\.\w+$/` → extracts module, sub, seq, ratio.
+- Sorted by `sequence` ascending. New files auto-insert — NO JSON edits.
+- Images live in `src/assets/works/` (NOT `public/` — Vite glob requires source-tree access).
+- Grid: `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))` + `grid-auto-rows: 10px`.
+- Ratio mapping: `1to1` → `grid-row-end: span 28`. `3to4` → `grid-row-end: span 38`. Square cards are shorter, tall cards are taller.
+- Emphasis rule: every 5th sequence (`seq % 5 === 0`) → `grid-column-end: span 2` wide card.
+- Empty directory → placeholder message, no crash.
+- NEVER break the filename→grid contract. The filename IS the layout specification.
