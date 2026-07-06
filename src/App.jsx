@@ -7,7 +7,7 @@ import Contact from './pages/Contact';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/PipiLespace">
       <Routes>
         {/* Layout wraps all routes — background, nav & audio persist */}
         <Route element={<Layout />}>
