@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import About from './pages/About';
 import Portfolio from './pages/Portfolio';
@@ -7,7 +7,7 @@ import Contact from './pages/Contact';
 
 export default function App() {
   return (
-    <BrowserRouter basename="/PipiLespace">
+    <HashRouter>
       <Routes>
         {/* Layout wraps all routes — background, nav & audio persist */}
         <Route element={<Layout />}>
@@ -18,6 +18,6 @@ export default function App() {
           <Route path="contact"         element={<Contact />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
