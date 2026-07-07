@@ -5,6 +5,8 @@ import Navbar from './Navbar';
 import AudioRipples from './AudioRipples';
 import CustomCursor from './CustomCursor';
 
+const BASE = import.meta.env.BASE_URL;
+
 const PAGE_TRANSITION = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
@@ -24,7 +26,7 @@ export default function Layout() {
 
       {/* ---- static logo (no interaction, bottom layer) ---- */}
       <img
-        src="/assets/design/logo_ppl.png"
+        src={`${BASE}assets/design/logo_ppl.png`}
         alt=""
         className="design-logo-static"
         aria-hidden="true"

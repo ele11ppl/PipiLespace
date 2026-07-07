@@ -11,7 +11,8 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 const EMIT_INTERVAL = 2500;   // ms between wave emissions
 const TOTAL_POINTS  = 48;     // vertices per ring (dense enough for high-freq drift)
 
-export default function AudioRipples({ src = '/audio/bgm.mp3' }) {
+export default function AudioRipples({ src }) {
+  const audioSrc = src || `${import.meta.env.BASE_URL}audio/bgm.mp3`;
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
   const ringsRef = useRef([]);
@@ -186,7 +187,7 @@ export default function AudioRipples({ src = '/audio/bgm.mp3' }) {
         onMouseLeave={() => setHovered(false)}
         aria-label={playing ? 'Pause' : 'Play'}
       >
-        <audio ref={audioRef} src={src} loop preload="none" />
+        <audio ref={audioRef} src={audioSrc} loop preload="none" />
 
         <svg viewBox="0 0 24 24" className="rp-icon" aria-hidden="true">
           {/* muted: double music note */}
